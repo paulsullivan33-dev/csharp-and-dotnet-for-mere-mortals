@@ -1,0 +1,28 @@
+site_name: C# & .NET for Mere Mortals
+site_description: Microsoft's language and the platform under it, from an empty machine to a finished program. Installing the free .NET SDK, building a console tool that analyses a stock file with LINQ, testing its sums with xUnit and an independent cross-check, and publishing a folder anyone can run, with the limits stated plainly.
+site_url: https://paulsullivan33-dev.github.io/csharp-and-dotnet-for-mere-mortals/
+copyright: 'Part of <a href="https://paulsullivan33-dev.github.io/mere-mortals/">For Mere Mortals</a> · Text CC BY 4.0, code MIT'
+
+# Guides live at the repo root (nice for GitHub browsing).
+# The deploy workflow copies them into docs/ before building.
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - What C# and .NET Are: what-csharp-and-dotnet-are.md
+  - The Moving Parts: the-moving-parts.md
+  - Installing the .NET SDK: installing-dotnet.md
+  - Your First Checks: your-first-checks.md
+  - Your First Program: your-first-program.md
+  - The Language Core: the-language-core.md
+  - Organising the Program — Classes and Records: organising-the-program.md
+  - Working with Data — CSV and LINQ: working-with-data.md
+  - Testing Your Code: testing-your-code.md
+  - Publishing Your App: publishing-your-app.md
+  - Recipes: recipes.md
+  - The Neighbours: the-neighbours.md
+  - Limits: limits.md
+  - Troubleshooting: troubleshooting.md
+  - Glossary: glossary.md
+  - Writing Criteria: criteria.md

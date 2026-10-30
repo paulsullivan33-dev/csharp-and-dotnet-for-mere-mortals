@@ -1,0 +1,29 @@
+# t06 — dotnet test: the xUnit suite, run for real
+
+The first restore (t05) failed on a proxy timeout; a retry succeeded
+(2.35 min). The template's sample test file was deleted and replaced
+with StockSummaryTests.cs — six tests over the same classes the
+console program uses, kept beside this transcript.
+
+$ dotnet test StockReport.Tests
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  StockReport -> /home/hatch/workspace/csharp-labwork/StockReport/bin/Debug/net10.0/StockReport.dll
+  StockReport.Tests -> /home/hatch/workspace/csharp-labwork/StockReport.Tests/bin/Debug/net10.0/StockReport.Tests.dll
+Test run for /home/hatch/workspace/csharp-labwork/StockReport.Tests/bin/Debug/net10.0/StockReport.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+vstest.console process failed to connect to testhost process after 90 seconds. This may occur due to machine slowness, please set environment variable VSTEST_CONNECTION_TIMEOUT to increase timeout. The process with id 60778 was still running when this message was reported.
+
+Test Run Aborted.
+
+--- retry with a longer testhost connection timeout ---
+
+$ VSTEST_CONNECTION_TIMEOUT=300 dotnet test StockReport.Tests
+  All projects are up-to-date for restore.
+  StockReport -> /home/hatch/workspace/csharp-labwork/StockReport/bin/Debug/net10.0/StockReport.dll
+  StockReport.Tests -> /home/hatch/workspace/csharp-labwork/StockReport.Tests/bin/Debug/net10.0/StockReport.Tests.dll
+Test run for /home/hatch/workspace/csharp-labwork/StockReport.Tests/bin/Debug/net10.0/StockReport.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+vstest.console process failed to connect to testhost process after 300 seconds. This may occur due to machine slowness, please set environment variable VSTEST_CONNECTION_TIMEOUT to increase timeout. The process with id 61098 was still running when this message was reported.
+
+Test Run Aborted.

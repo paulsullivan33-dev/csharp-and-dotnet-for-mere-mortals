@@ -1,0 +1,24 @@
+# t10 — stretch goal: the stock report as a web service (ASP.NET Core)
+
+A second project (dotnet new web) reuses the console program's
+three types unchanged and serves their answers as JSON. First
+attempt listened on the template's launchSettings port (5155),
+not the one asked for — dotnet run applies launchSettings.json
+over the environment. Relaunched with --no-launch-profile and
+ASPNETCORE_URLS=http://127.0.0.1:18080:
+
+$ curl http://127.0.0.1:18080/
+StockApi: try /stock or /stock/low
+
+$ curl http://127.0.0.1:18080/stock
+{"lines":14,"totalUnits":3279,"totalValue":19021.35,"averageUnitPrice":12.35,"mostValuableLine":"W-1007"}
+
+$ curl http://127.0.0.1:18080/stock/low
+[{"sku":"W-1009","name":"Spirit level 600mm","quantity":8},{"sku":"W-1006","name":"Insulation tape (roll)","quantity":15},{"sku":"W-1014","name":"Matt emulsion 5L","quantity":26}]
+
+$ curl -o /dev/null -w "%{http_code}" http://127.0.0.1:18080/nope
+404
+
+Server log:
+      Now listening on: http://127.0.0.1:18080
+      Application started. Press Ctrl+C to shut down.

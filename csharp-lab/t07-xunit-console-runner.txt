@@ -1,0 +1,51 @@
+# t07 — the xUnit suite, run by xUnit's own console runner
+
+dotnet test could not reach its testhost in this sandbox (t06 —
+the testhost process ran, but the console's loopback connection
+to it never landed, at a 90-second and then a 300-second timeout).
+That is a limit of this build machine, not of the code. The
+xunit.runner.console package — version 2.9.3, the suite's own
+xUnit version, fetched from nuget.org — runs the same compiled
+test assembly in one process, with no socket to connect:
+
+$ dotnet exec xunit-runner/tools/net6.0/xunit.console.dll \
+    StockReport.Tests/bin/Debug/net10.0/StockReport.Tests.dll -nocolor
+
+--- first run: 5 of 6 pass, and the failure is the author's ---
+
+xUnit.net Console Runner v2.9.3+9712244020 (64-bit .NET 10.0.14)
+  Discovering: StockReport.Tests
+  Discovered:  StockReport.Tests
+  Starting:    StockReport.Tests
+    StockReport.Tests.StockSummaryTests.Most_valuable_line_is_the_work_light [FAIL]
+      Assert.Equal() Failure: Strings differ
+                     ↓ (pos 4)
+      Expected: "T-002"
+      Actual:   "T-001"
+                     ↑ (pos 4)
+      Stack Trace:
+        /home/hatch/workspace/csharp-labwork/StockReport.Tests/StockSummaryTests.cs(35,0): at StockReport.Tests.StockSummaryTests.Most_valuable_line_is_the_work_light()
+           at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+           at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Finished:    StockReport.Tests
+=== TEST EXECUTION SUMMARY ===
+   StockReport.Tests  Total: 6, Errors: 0, Failed: 1, Skipped: 0, Time: 0.239s
+
+The failing assertion expected fixture line T-002 (the work
+light, 10 x 20.00 = 200.00) as the most valuable line. The
+program answered T-001 (the bolts, 100 x 2.50 = 250.00).
+Hand arithmetic says the program is right and the test's
+expectation was mis-added when the test was written. The
+test — not the program — was fixed, and the suite re-run:
+
+--- second run, after the one-line correction ---
+
+xUnit.net Console Runner v2.9.3+9712244020 (64-bit .NET 10.0.14)
+  Discovering: StockReport.Tests
+  Discovered:  StockReport.Tests
+  Starting:    StockReport.Tests
+  Finished:    StockReport.Tests
+=== TEST EXECUTION SUMMARY ===
+   StockReport.Tests  Total: 6, Errors: 0, Failed: 0, Skipped: 0, Time: 0.187s
+
+Exit code 0. Six of six.

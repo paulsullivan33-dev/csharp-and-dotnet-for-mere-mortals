@@ -1,0 +1,44 @@
+# t08 — publish, and run the result somewhere else entirely
+
+$ dotnet publish StockReport -c Release -o publish-out
+  All projects are up-to-date for restore.
+  StockReport -> /home/hatch/workspace/csharp-labwork/StockReport/bin/Release/net10.0/StockReport.dll
+  StockReport -> /home/hatch/workspace/csharp-labwork/publish-out/
+
+$ ls -la publish-out
+total 120
+drwxrwx--- 1 root root   184 Oct 30 13:04 .
+drwxrwx--- 1 root root   278 Oct 30 13:04 ..
+-rwxr-xr-x 1 root root 78192 Oct 30 13:04 StockReport
+-rw-rw---- 1 root root   405 Oct 30 13:04 StockReport.deps.json
+-rw-rw---- 1 root root 12800 Oct 30 13:04 StockReport.dll
+-rw-rw---- 1 root root 12528 Oct 30 13:04 StockReport.pdb
+-rw-rw---- 1 root root   330 Oct 30 13:04 StockReport.runtimeconfig.json
+
+$ du -sh publish-out
+120K	publish-out
+
+# copy just the published folder and the CSV to a fresh place,
+# leave the project behind, and run the program there:
+
+$ mkdir elsewhere && cp -r publish-out/* elsewhere/ && cp StockReport/stock.csv elsewhere/
+$ cd elsewhere && ./StockReport stock.csv
+Stock report for stock.csv
+Lines in stock:    14
+Total units:       3279
+Total stock value: 19021.35
+Average unit price: 12.35
+
+Value by category:
+  Safety          5097.50
+  Electrical      4883.25
+  Tools           4344.00
+  Hardware        3501.00
+  Decorating      1195.60
+
+Most valuable line: W-1007 Cordless drill driver — 42 x 64.50 = 2709.00
+
+Low stock (under 30 units):
+  W-1009 Spirit level 600mm — 8 left
+  W-1006 Insulation tape (roll) — 15 left
+  W-1014 Matt emulsion 5L — 26 left

@@ -1,0 +1,35 @@
+# t02 — a new console project, and its first run
+
+$ dotnet new console -n StockReport
+The template "Console App" was created successfully.
+
+Processing post-creation actions...
+Restoring /home/hatch/workspace/csharp-labwork/StockReport/StockReport.csproj:
+  Determining projects to restore...
+  Restored /home/hatch/workspace/csharp-labwork/StockReport/StockReport.csproj (in 181 ms).
+Restore succeeded.
+
+
+
+$ ls StockReport
+Program.cs
+StockReport.csproj
+obj
+
+$ cat StockReport/StockReport.csproj
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
+
+$ cat StockReport/Program.cs
+﻿Console.WriteLine("Hello, World!");
+
+$ cd StockReport && dotnet run
+Hello, World!

@@ -1,0 +1,26 @@
+# t03 — the real program: a warehouse stock report
+
+Program.cs, StockItem.cs (a record), StockFile.cs and StockSummary.cs
+are kept in csharp-lab/ next to this transcript; stock.csv is the
+invented fixture. The run:
+
+$ dotnet run -- stock.csv
+Stock report for stock.csv
+Lines in stock:    14
+Total units:       3279
+Total stock value: 19021.35
+Average unit price: 12.35
+
+Value by category:
+  Safety          5097.50
+  Electrical      4883.25
+  Tools           4344.00
+  Hardware        3501.00
+  Decorating      1195.60
+
+Most valuable line: W-1007 Cordless drill driver — 42 x 64.50 = 2709.00
+
+Low stock (under 30 units):
+  W-1009 Spirit level 600mm — 8 left
+  W-1006 Insulation tape (roll) — 15 left
+  W-1014 Matt emulsion 5L — 26 left

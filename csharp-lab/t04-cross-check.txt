@@ -1,0 +1,18 @@
+# t04 — the same answers, computed by a different tool (python3)
+
+Nothing here uses C#: check.py (kept beside this transcript) reads
+the same fixture with python's csv module and works the sums out
+on its own. Every figure must match t03.
+
+$ python3 check.py stock.csv
+lines: 14
+total units: 3279
+total value: 19021.35
+average unit price: 12.35
+category Safety 5097.50
+category Electrical 4883.25
+category Tools 4344.00
+category Hardware 3501.00
+category Decorating 1195.60
+most valuable: W-1007 2709.00
+low stock (<30): [('W-1009', 8), ('W-1006', 15), ('W-1014', 26)]

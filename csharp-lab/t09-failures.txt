@@ -1,0 +1,29 @@
+# t09 — two failures, kept verbatim
+
+1) The file is not there:
+
+$ ./StockReport no-such-file.csv
+Unhandled exception. System.IO.FileNotFoundException: Could not find file '/home/hatch/workspace/csharp-labwork/elsewhere/no-such-file.csv'.
+File name: '/home/hatch/workspace/csharp-labwork/elsewhere/no-such-file.csv'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllLines(String path, Encoding encoding)
+   at StockReport.StockFile.Load(String path) in /home/hatch/workspace/csharp-labwork/StockReport/StockFile.cs:line 10
+   at Program.<Main>$(String[] args) in /home/hatch/workspace/csharp-labwork/StockReport/Program.cs:line 8
+/bin/bash: line 1: 62002 Aborted                 ./StockReport no-such-file.csv
+exit code: 134
+
+2) The file is there, but a quantity is a word, not a number:
+
+$ ./StockReport bad.csv
+Unhandled exception. System.FormatException: The input string 'twelve' was not in a correct format.
+   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)
+   at System.Int32.Parse(String s, IFormatProvider provider)
+   at StockReport.StockFile.ParseRow(String row) in /home/hatch/workspace/csharp-labwork/StockReport/StockFile.cs:line 26
+   at StockReport.StockFile.Load(String path) in /home/hatch/workspace/csharp-labwork/StockReport/StockFile.cs:line 18
+   at Program.<Main>$(String[] args) in /home/hatch/workspace/csharp-labwork/StockReport/Program.cs:line 8
+/bin/bash: line 1: 62009 Aborted                 ./StockReport bad.csv
+exit code: 134

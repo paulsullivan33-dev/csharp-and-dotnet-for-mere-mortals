@@ -1,0 +1,24 @@
+# t00 — installing the .NET SDK in the lab
+
+Route: official dotnet-install script (https://dot.net/v1/dotnet-install.sh),
+then — when its extraction failed — the official SDK tarball it names,
+downloaded and unpacked by hand into the same folder.
+
+$ ./dotnet-install.sh --channel LTS --install-dir ~/workspace/csharp-labwork/dotnet
+tar: ./sdk/10.0.403/Sdks/Microsoft.NET.Sdk/analyzers/pt-BR/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll: Wrote only 2048 of 10240 bytes
+tar: ./sdk/10.0.403/Sdks/Microsoft.NET.Sdk/analyzers/ru/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll: Cannot write: No space left on device
+tar: ./sdk/10.0.403/Sdks/Microsoft.NET.Sdk/analyzers/fr/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll: Cannot write: No space left on device
+tar: ./sdk/10.0.403/Sdks/Microsoft.NET.Sdk/analyzers/Microsoft.CodeAnalysis.CSharp.NetAnalyzers.dll: Cannot write: No space left on device
+
+(the same 'No space left on device' failure on both script attempts,
+while a 400 MB test file wrote happily to the same folder; extracting
+the tarball directly with tar succeeded — see criteria.md)
+
+$ ls -la dotnet-sdk.tar.gz
+-rw-rw---- 1 root root 240199984 Oct 30 12:15 /home/hatch/workspace/csharp-labwork/dotnet-sdk.tar.gz
+
+$ sha256sum dotnet-sdk.tar.gz
+cd7224fe8e8ba57c15f1601439ff8785a1a72b54ae5c89dd5302a32dcfbddf18  /home/hatch/workspace/csharp-labwork/dotnet-sdk.tar.gz
+
+$ du -sh dotnet
+621M	/home/hatch/workspace/csharp-labwork/dotnet
